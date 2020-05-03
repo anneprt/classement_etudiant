@@ -1,41 +1,27 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class Cursus {
-    private Etudiant[] liste;
+    private ArrayList liste;
 
-    public void Classe() {
-        Scanner lectureClavier = new Scanner(System.in);
-        System.out.println("Nombre d'étudiants");
-        int nbEtudiants = lectureClavier.nextInt();
-        liste = new Etudiant[nbEtudiants];
-        for (int i = 0; i < liste.length; i++) {
-            liste[i] = new Etudiant();
-        }
+    public Cursus() {
+        liste = new ArrayList();
+    }
+
+    public void ajouteUnEtudiant() {
+        liste.add(new Etudiant());
     }
 
     public void afficheLesEtudiants() {
-        for (Etudiant e : liste) {
-            e.afficheUnEtudiant();
-        }
-    }
-
-    private int ouEstLePlusPetit(int debut) {
-        int i = debut;
-        for (int j = debut + 1; j < liste.length; j++)
-            if (liste[j].quelleMoyenne() < liste[i].quelleMoyenne()) {
-                i = j;
+        int nbEtudiants = liste.size();
+        if (nbEtudiants > 0) {
+            Etudiant tmp;
+            for (int i = 0; i > nbEtudiants; i++) {
+                tmp = (Etudiant) liste.get(i);
+                tmp.afficheUnEtudiant();
             }
-        return i;
-    }
-
-    public void classerParMoyenne() {
-        int indiceDuPlusPetit;
-        Etudiant tmp;
-        for (int i = 0; i < liste.length; i++) {
-            indiceDuPlusPetit = ouEstLePlusPetit(i);
-            tmp = liste[i];
-            liste[i] = liste[indiceDuPlusPetit];
-            liste[indiceDuPlusPetit] = tmp;
+        } else {
+            System.out.println("Il n'y a pas d'étudiants dans cette liste");
         }
     }
 }
