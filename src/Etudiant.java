@@ -33,8 +33,8 @@ public class Etudiant {
         return somme / nbNotes;
     }
 
-    public double quelleMoyenne() {
-        return moyenne;
+    public int quelleMoyenne() {
+        return (int) moyenne;
     }
 
     public void afficheUnEtudiant() {

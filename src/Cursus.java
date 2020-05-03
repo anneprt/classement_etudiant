@@ -1,15 +1,21 @@
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
 
 public class Cursus {
+    private ArrayList<Etudiant> liste;
+
+    public Cursus() {
+        liste = new ArrayList<Etudiant>();
+    }
 
     private HashMap<String, Etudiant> listeClassee;
 
-    public Cursus() {
-        listeClassee = new HashMap<String, Etudiant>();
-    }
+    //public Cursus() {
+    // listeClassee = new HashMap<String, Etudiant>();
+    // }
 
     private String creerUneCle(Etudiant e) {
         String tmp = (e.quelPrenom().charAt(0) + e.quelNom());
@@ -64,6 +70,19 @@ public class Cursus {
         } else {
             System.out.println("Il n'y a pas d'étudiants dans cette liste");
         }
+    }
+
+    public void memePrenom(String tmp) {
+        liste.stream().filter(e -> e.quelNom().startsWith(tmp))
+                .forEach(e -> e.afficheUnEtudiant());
+    }
+
+    public void rechercheLeMajor() {
+        Etudiant max = liste.stream()
+                .max((e1, e2) -> (e1.quelleMoyenne() - e2.quelleMoyenne()))
+                .get();
+        max.afficheUnEtudiant();
+
     }
 }
 

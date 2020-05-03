@@ -28,6 +28,9 @@ public class GestionCursus {
                     C.supprimeUnEtudiant(prenom, nom);
                     break;
                 case 3:
+                    System.out.print("Nom de l'étudiant recherche : ");
+                    nom = lectureClavier.next();
+                    C.memePrenom(nom);
                     C.afficheLesEtudiants();
                     break;
                 case 4:
@@ -36,6 +39,7 @@ public class GestionCursus {
                     System.out.print("Entrer le nom de l'étudiant : ");
                     nom = lectureClavier.next();
                     C.rechercheUnEtudiant(prenom, nom);
+                    C.rechercheLeMajor();
                     break;
                 case 5:
                     System.exit(0);
