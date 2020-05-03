@@ -1,9 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Etudiant {
     private String nom;
     private String prenom;
-    private double[] notes;
+    private ArrayList<Double> notes;
     private double moyenne;
 
     public Etudiant() {
@@ -15,24 +16,30 @@ public class Etudiant {
         System.out.print("Combien de notes pour l'étudiant  ");
         System.out.print(prenom + " " + nom + " :  ");
         int nombre = lectureClavier.nextInt();
-        notes = new double[nombre];
-        for (int i = 0; i < notes.length; i++) {
+        notes = new ArrayList<Double>();
+        for (int i = 0; i < nombre; i++) {
             System.out.print("Entrer la note numéro " + (i + 1) + " :  ");
-            notes[i] = lectureClavier.nextDouble();
+            notes.add(new Double(lectureClavier.nextDouble()));
         }
         moyenne = calculMoyenne();
     }
 
     private double calculMoyenne() {
         double somme = 0.0;
+        int nbNotes = notes.size();
         for (double valeurNote : notes) {
             somme = somme + valeurNote;
         }
-        return somme / notes.length;
+        return somme / nbNotes;
+    }
+
+    public double quelleMoyenne() {
+        return moyenne;
     }
 
     public void afficheUnEtudiant() {
         System.out.print("Les notes  de " + prenom + " " + nom + " sont : ");
+        int nbNotes = notes.size();
         for (double valeurNote : notes) {
             System.out.print(" " + valeurNote);
             System.out.println();
@@ -40,9 +47,6 @@ public class Etudiant {
         }
     }
 
-    public double quelleMoyenne() {
-        return moyenne;
-    }
 
     public String quelNom() {
         return nom;
