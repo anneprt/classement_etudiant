@@ -5,10 +5,15 @@ public class GestionCursus {
         byte choix;
         Scanner lectureClavier = new Scanner(System.in);
         Cursus C = new Cursus();
+        String prenom;
+        String nom;
         do {
-            System.out.println("1. Ajoute un etudiant");
-            System.out.println("2. Affiche la liste des etudiants");
-            System.out.println("3. Pour sortir");
+            System.out.println("1. Ajoute un étudiant");
+            System.out.println("2. Supprime un étudiant");
+            System.out.println("3. Affiche la liste des étudiants");
+            System.out.println("4. Affiche un étudiant");
+            System.out.println("5. Sortir");
+            System.out.println();
             System.out.print("Votre choix : ");
             choix = lectureClavier.nextByte();
             switch (choix) {
@@ -16,14 +21,28 @@ public class GestionCursus {
                     C.ajouteUnEtudiant();
                     break;
                 case 2:
-                    C.afficheLesEtudiants();
+                    System.out.print("Entrer le prénom de l'étudiant à supprimer : ");
+                    prenom = lectureClavier.next();
+                    System.out.print("Entrer le nom de l'étudiant à supprimer : ");
+                    nom = lectureClavier.next();
+                    C.supprimeUnEtudiant(prenom, nom);
                     break;
                 case 3:
+                    C.afficheLesEtudiants();
+                    break;
+                case 4:
+                    System.out.print("Entrer le prénom de l'étudiant : ");
+                    prenom = lectureClavier.next();
+                    System.out.print("Entrer le nom de l'étudiant : ");
+                    nom = lectureClavier.next();
+                    C.rechercheUnEtudiant(prenom, nom);
+                    break;
+                case 5:
                     System.exit(0);
                 default:
                     System.out.println("Cette option n'existe pas");
             }
         }
-        while (choix != 3);
+        while (choix != 5);
     }
 }

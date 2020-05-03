@@ -43,5 +43,13 @@ public class Etudiant {
     public double quelleMoyenne() {
         return moyenne;
     }
+
+    public String quelNom() {
+        return nom;
+    }
+
+    public String quelPrenom() {
+        return prenom;
+    }
 }
 
