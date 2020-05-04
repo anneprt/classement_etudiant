@@ -1,10 +1,16 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class GestionCursus {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         byte choix;
         Scanner lectureClavier = new Scanner(System.in);
         Cursus C = new Cursus();
+        FichierEtudiant F = new FichierEtudiant();
+        if (F.ouvrir("Lecture")) {
+            C = F.lire();
+            F.fermer();
+        }
         String prenom;
         String nom;
         do {
@@ -42,6 +48,10 @@ public class GestionCursus {
                     C.rechercheLeMajor();
                     break;
                 case 5:
+                    System.out.println("Sauvegarde des données dans Cursus.dat");
+                    F.ouvrir("Ecriture");
+                    F.ecrire(C);
+                    F.fermer();
                     System.exit(0);
                 default:
                     System.out.println("Cette option n'existe pas");

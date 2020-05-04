@@ -6,14 +6,16 @@ public class FichierEtudiant {
     private String nomDuFichier = "Cursus.dat";
     private char mode;
 
-    public void ouvrir(String s) throws IOException {
-        mode = (s.toUpperCase()).charAt(0);
-        if (mode == 'R' || mode == 'L') {
-            ofR = new ObjectInputStream(new FileInputStream(nomDuFichier));
-        } else {
-            if (mode == 'W' || mode == 'E') {
+    public boolean ouvrir(String s) {
+        try {
+            mode = (s.toUpperCase()).charAt(0);
+            if (mode == 'R' || mode == 'L')
+                ofR = new ObjectInputStream(new FileInputStream(nomDuFichier));
+            else if (mode == 'W' || mode == 'E')
                 ofW = new ObjectOutputStream(new FileOutputStream(nomDuFichier));
-            }
+            return true;
+        } catch (IOException e) {
+            return false;
         }
     }
 
@@ -24,9 +26,16 @@ public class FichierEtudiant {
         }
     }
 
-    public Cursus lire() throws IOException, ClassNotFoundException {
-        Cursus tmp = (Cursus) ofR.readObject();
-        return tmp;
+    public Cursus lire() {
+        try {
+            Cursus tmp = (Cursus) ofR.readObject();
+            return tmp;
+        } catch (IOException e) {
+            System.out.println(nomDuFichier + ":Erreur de lecture");
+        } catch (ClassNotFoundException e) {
+            System.out.println(nomDuFichier + "n'est pas du bon format");
+        }
+        return null;
     }
 
     public void fermer() throws IOException {
