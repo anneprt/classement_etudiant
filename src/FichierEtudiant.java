@@ -19,10 +19,11 @@ public class FichierEtudiant {
         }
     }
 
-    public void ecrire(Cursus tmp) throws IOException {
-
-        if (tmp != null) {
-            ofW.writeObject(tmp);
+    public void ecrire(Cursus tmp) {
+        try {
+            if (tmp != null) ofW.writeObject(tmp);
+        } catch (IOException e) {
+            System.out.println(nomDuFichier + " : Erreur en cours d'ecriture " + e);
         }
     }
 
@@ -31,20 +32,19 @@ public class FichierEtudiant {
             Cursus tmp = (Cursus) ofR.readObject();
             return tmp;
         } catch (IOException e) {
-            System.out.println(nomDuFichier + ":Erreur de lecture");
+            System.out.println(nomDuFichier + " : Erreur  de lecture ");
         } catch (ClassNotFoundException e) {
-            System.out.println(nomDuFichier + "n'est pas du bon format");
+            System.out.println(nomDuFichier + " n'est pas du bon format ");
         }
         return null;
     }
 
-    public void fermer() throws IOException {
-        if (mode == 'R' || mode == 'L') {
-            ofR.close();
-        } else {
-            if (mode == 'W' || mode == 'E') {
-                ofW.close();
-            }
+    public void fermer() {
+        try {
+            if (mode == 'R' || mode == 'L') ofR.close();
+            else if (mode == 'W' || mode == 'E') ofW.close();
+        } catch (IOException e) {
+            System.out.println(nomDuFichier + " : Erreur à la fermeture ");
         }
     }
 

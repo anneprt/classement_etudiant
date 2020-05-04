@@ -1,8 +1,7 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class GestionCursus {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         byte choix;
         Scanner lectureClavier = new Scanner(System.in);
         Cursus C = new Cursus();
