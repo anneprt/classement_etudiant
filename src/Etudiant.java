@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Etudiant {
+public class Etudiant implements Serializable {
     private String nom;
     private String prenom;
     private ArrayList<Double> notes;
